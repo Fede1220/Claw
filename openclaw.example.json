@@ -1,0 +1,95 @@
+{
+  "agents": {
+    "defaults": {
+      "workspace": "/home/node/.openclaw/workspace",
+      "model": {
+        "primary": "ollama/qwen2.5:3b-instruct"
+      },
+      "bootstrapMaxChars": 800,
+      "heartbeat": {
+        "every": "0m",
+        "lightContext": true
+      },
+      "thinkingDefault": "off",
+      "compaction": {
+        "reserveTokensFloor": 2000
+      }
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": "REPLACE_WITH_RANDOM_HEX"
+    },
+    "port": 18789,
+    "bind": "lan",
+    "controlUi": {
+      "allowedOrigins": [
+        "http://localhost:18789",
+        "http://127.0.0.1:18789"
+      ],
+      "allowInsecureAuth": true
+    }
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "tools": {
+    "profile": "messaging"
+  },
+  "skills": {
+    "entries": {
+      "himalaya": {
+        "enabled": false
+      }
+    },
+    "allowBundled": []
+  },
+  "plugins": {
+    "entries": {
+      "google": {
+        "enabled": false
+      },
+      "ollama": {
+        "enabled": true
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing"
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "ollama": {
+        "baseUrl": "http://host.docker.internal:11434",
+        "api": "ollama",
+        "apiKey": "OLLAMA_API_KEY",
+        "models": [
+          {
+            "id": "qwen2.5:3b-instruct",
+            "name": "qwen2.5:3b-instruct",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 8192,
+            "maxTokens": 1024,
+            "compat": {
+              "supportsTools": true,
+              "supportsUsageInStreaming": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# Lean OpenClaw for low-RAM hosts (8GB Windows laptop target).
+# Config lives in ./.openclaw (gitignored) — never mount your whole disk.
+services:
+  openclaw:
+    image: ghcr.io/openclaw/openclaw:latest
+    container_name: openclaw
+    restart: unless-stopped
+    ports:
+      - "18789:18789"
+    extra_hosts:
+      # Reach Ollama on the host (Docker Desktop: Mac + Windows)
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - path: ${OPENCLAW_CONFIG_DIR:-./.openclaw}/.env
+        required: false
+    environment:
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
+      - NODE_OPTIONS=${NODE_OPTIONS:---max-old-space-size=1536}
+    volumes:
+      # Only agent config / memory / sessions — not your Projects folder
+      - ${OPENCLAW_CONFIG_DIR:-./.openclaw}:/home/node/.openclaw
+    init: true

@@ -1,0 +1,17 @@
+# From the cloned Claw folder (Git Bash or WSL)
+
+./setup.sh          # first-time config + start gateway
+./add-ollama.sh     # Ollama qwen2.5:3b-instruct (8GB-safe defaults)
+./start.sh          # start gateway
+./stop.sh           # stop gateway
+./reset-chat.sh     # clear bloated sessions (context overflow fix)
+./update.sh         # pull latest OpenClaw image
+./login-url.sh      # Control UI token
+./approve-browser.sh
+
+# Windows: see WINDOWS.md
+# Fallback model if RAM is tight:
+#   OLLAMA_MODEL=qwen2.5:1.5b-instruct ./add-ollama.sh
+
+docker compose ps
+docker compose logs -f

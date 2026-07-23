@@ -1,0 +1,18 @@
+# Local OpenClaw state (config, secrets, sessions, memory)
+.openclaw/
+*.env
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local dumps / backups
+*.log
+backup-*/
+**/sessions/backup-*/
